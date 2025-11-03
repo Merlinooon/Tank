@@ -1,0 +1,14 @@
+D:\Projects\MapGenerator\MapGenerator\bin\Debug\net8.0\MapGenerator.exe
+D:\Projects\MapGenerator\MapGenerator\bin\Debug\net8.0\MapGenerator.deps.json
+D:\Projects\MapGenerator\MapGenerator\bin\Debug\net8.0\MapGenerator.runtimeconfig.json
+D:\Projects\MapGenerator\MapGenerator\bin\Debug\net8.0\MapGenerator.dll
+D:\Projects\MapGenerator\MapGenerator\bin\Debug\net8.0\MapGenerator.pdb
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.AssemblyInfoInputs.cache
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.AssemblyInfo.cs
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.csproj.CoreCompileInputs.cache
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.dll
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\refint\MapGenerator.dll
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.pdb
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.genruntimeconfig.cache
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\ref\MapGenerator.dll

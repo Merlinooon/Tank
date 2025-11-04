@@ -81,13 +81,13 @@ namespace MapGenerator
             int x = (int)position.X;
             int y = (int)position.Y;
 
-            if (x < 0 || x >= _mapGenerator.Map.GetLength(1) ||
-                y < 0 || y >= _mapGenerator.Map.GetLength(0))
+            if (x < 0 || x >= _mapGenerator.Map.GetLength(0) ||
+                y < 0 || y >= _mapGenerator.Map.GetLength(1))
             {
                 return true;
             }
 
-            char cell = _mapGenerator.Map[y, x];
+            char cell = _mapGenerator.Map[x, y];
             return cell == '█' || cell == '▒';
         }
 
@@ -99,45 +99,7 @@ namespace MapGenerator
             WallHit?.Invoke(collisionPosition);
         }
     }
-        //private Vector2 _direction;
-        //public event Action Death;
-        //Vector2 _startPosition;
-        //IRenderer _renderer;
-        //private int _speed = 1;
-
-        //public Missile(Vector2 startPosition, Vector2 direction, IRenderer renderer) : base(startPosition, "·", renderer)
-        //{
-        //    _direction = direction;
-        //    _startPosition = startPosition;
-        //    _renderer = renderer;
-        //}
-
-        //public override void Update()
-        //{
-        //    // Двигаем пулю вперед
-        //    //if()
-        //    Position = new Vector2(Position.X + _direction.X, Position.Y +_direction.Y);
-
-
-        //    // Проверяем столкновения
-        //    foreach (Unit unit in LevelModel.Units)
-        //    {
-        //        if (unit == this || unit is Missile)
-        //            continue;
-
-        //        if (Position.Equals(unit.Position))
-        //        {
-        //            Death?.Invoke();
-        //            break;
-        //        }
-        //    }
-
-        //    // Уничтожаем пулю если она вышла за пределы экрана
-        //    if (Position.X > 50) // Замените на реальные границы уровня
-        //    {
-        //        Death?.Invoke();
-        //    }
-        //}
+        
 
        
 }

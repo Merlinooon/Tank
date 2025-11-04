@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "D:\\Projects\\MapGenerator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\vector2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\vector2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\units.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\units.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\unitfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\unitfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\unitconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\unitconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\thewall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\thewall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,8 +39,36 @@
       "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\missile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\levelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\levelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\levelmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\levelmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\irenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\irenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\imoveinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\imoveinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\iattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\iattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\consoleinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,46 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\consolerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\consolerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\imoveinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\imoveinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\irenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\irenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\levelmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\levelmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\levelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\levelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\thewall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\thewall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\vector2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\vector2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\unitconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\unitconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\units.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\units.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|d:\\projects\\mapgenerator\\mapgenerator\\iattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE47B383-4602-4899-9E69-0429B3AAB453}|MapGenerator\\MapGenerator.csproj|solutionrelative:mapgenerator\\iattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,58 +86,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Enemy.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Enemy.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\Enemy.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Enemy.cs",
-              "RelativeToolTip": "MapGenerator\\Enemy.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAIwIUAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-01T12:43:39.41Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ConsoleRenderer.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleRenderer.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\ConsoleRenderer.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleRenderer.cs",
-              "RelativeToolTip": "MapGenerator\\ConsoleRenderer.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAIwF4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T10:15:23.5Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ConsoleInput.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleInput.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\ConsoleInput.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleInput.cs",
-              "RelativeToolTip": "MapGenerator\\ConsoleInput.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T15:16:19.437Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "MapGenerator.cs",
               "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\MapGenerator.cs",
               "RelativeDocumentMoniker": "MapGenerator\\MapGenerator.cs",
               "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\MapGenerator.cs",
               "RelativeToolTip": "MapGenerator\\MapGenerator.cs",
-              "ViewState": "AgIAAJsBAAAAAAAAAAAcwM8BAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T09:39:31.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Missile.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Missile.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\Missile.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Missile.cs",
+              "RelativeToolTip": "MapGenerator\\Missile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwv2UAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-02T12:28:20.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Player.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Player.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\Player.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Player.cs",
+              "RelativeToolTip": "MapGenerator\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T15:15:21.946Z",
               "EditorCaption": ""
             },
             {
@@ -148,118 +135,14 @@
               "RelativeDocumentMoniker": "MapGenerator\\Program.cs",
               "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Program.cs",
               "RelativeToolTip": "MapGenerator\\Program.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAuwGcAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T09:26:19.778Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Unit.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Unit.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\Unit.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Unit.cs",
-              "RelativeToolTip": "MapGenerator\\Unit.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAqwEkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T15:13:06.734Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Player.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Player.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\Player.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Player.cs",
-              "RelativeToolTip": "MapGenerator\\Player.cs",
-              "ViewState": "AgIAAHQAAAAAAAAAAAA9wK0AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T15:15:21.946Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Missile.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Missile.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\Missile.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Missile.cs",
-              "RelativeToolTip": "MapGenerator\\Missile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-02T12:28:20.108Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UnitFactory.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\UnitFactory.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\UnitFactory.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\UnitFactory.cs",
-              "RelativeToolTip": "MapGenerator\\UnitFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T15:18:29.895Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "IMoveInput.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\IMoveInput.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\IMoveInput.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\IMoveInput.cs",
-              "RelativeToolTip": "MapGenerator\\IMoveInput.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T15:15:49.415Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "IRenderer.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\IRenderer.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\IRenderer.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\IRenderer.cs",
-              "RelativeToolTip": "MapGenerator\\IRenderer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T10:14:55.059Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "LevelMenu.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelMenu.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\LevelMenu.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelMenu.cs",
-              "RelativeToolTip": "MapGenerator\\LevelMenu.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAE4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T15:33:30.821Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "LevelModel.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelModel.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\LevelModel.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelModel.cs",
-              "RelativeToolTip": "MapGenerator\\LevelModel.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAwwJwAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T15:13:58.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "TheWall.cs",
               "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\TheWall.cs",
               "RelativeDocumentMoniker": "MapGenerator\\TheWall.cs",
@@ -272,20 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Vector2.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Vector2.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\Vector2.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Vector2.cs",
-              "RelativeToolTip": "MapGenerator\\Vector2.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T10:07:51.193Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 3,
               "Title": "UnitConfig.cs",
               "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\UnitConfig.cs",
               "RelativeDocumentMoniker": "MapGenerator\\UnitConfig.cs",
@@ -298,7 +168,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 4,
+              "Title": "Unit.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Unit.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\Unit.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Unit.cs",
+              "RelativeToolTip": "MapGenerator\\Unit.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAmwEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T15:13:06.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UnitFactory.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\UnitFactory.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\UnitFactory.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\UnitFactory.cs",
+              "RelativeToolTip": "MapGenerator\\UnitFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T15:18:29.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Units.cs",
               "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Units.cs",
               "RelativeDocumentMoniker": "MapGenerator\\Units.cs",
@@ -311,28 +207,132 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 0,
+              "Title": "Vector2.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Vector2.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\Vector2.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Vector2.cs",
+              "RelativeToolTip": "MapGenerator\\Vector2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T10:07:51.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "LevelModel.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelModel.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\LevelModel.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelModel.cs",
+              "RelativeToolTip": "MapGenerator\\LevelModel.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAiwD0AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T15:13:58.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LevelMenu.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelMenu.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\LevelMenu.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\LevelMenu.cs",
+              "RelativeToolTip": "MapGenerator\\LevelMenu.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T15:33:30.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IRenderer.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\IRenderer.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\IRenderer.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\IRenderer.cs",
+              "RelativeToolTip": "MapGenerator\\IRenderer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T10:14:55.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IMoveInput.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\IMoveInput.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\IMoveInput.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\IMoveInput.cs",
+              "RelativeToolTip": "MapGenerator\\IMoveInput.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T15:15:49.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IAttack.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\IAttack.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\IAttack.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\IAttack.cs",
+              "RelativeToolTip": "MapGenerator\\IAttack.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-02T12:35:14.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "GameObject.cs",
               "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\GameObject.cs",
               "RelativeDocumentMoniker": "MapGenerator\\GameObject.cs",
               "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\GameObject.cs",
               "RelativeToolTip": "MapGenerator\\GameObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-03T13:41:32.257Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "IAttack.cs",
-              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\IAttack.cs",
-              "RelativeDocumentMoniker": "MapGenerator\\IAttack.cs",
-              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\IAttack.cs",
-              "RelativeToolTip": "MapGenerator\\IAttack.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 16,
+              "Title": "Enemy.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\Enemy.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\Enemy.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\Enemy.cs",
+              "RelativeToolTip": "MapGenerator\\Enemy.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAJ0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-02T12:35:14.952Z",
+              "WhenOpened": "2025-11-01T12:43:39.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ConsoleInput.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleInput.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\ConsoleInput.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleInput.cs",
+              "RelativeToolTip": "MapGenerator\\ConsoleInput.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T15:16:19.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ConsoleRenderer.cs",
+              "DocumentMoniker": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleRenderer.cs",
+              "RelativeDocumentMoniker": "MapGenerator\\ConsoleRenderer.cs",
+              "ToolTip": "D:\\Projects\\MapGenerator\\MapGenerator\\ConsoleRenderer.cs",
+              "RelativeToolTip": "MapGenerator\\ConsoleRenderer.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAIwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T10:15:23.5Z",
               "EditorCaption": ""
             }
           ]

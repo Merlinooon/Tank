@@ -57,8 +57,8 @@ namespace MapGenerator
             if (currentMap == null) return false;
 
             // Проверяем границы
-            if (newPosition.X < 0 || newPosition.X >= currentMap.GetLength(0) ||
-                newPosition.Y < 0 || newPosition.Y >= currentMap.GetLength(1))
+            if (newPosition.X < 0 || newPosition.X >= currentMap.GetLength(1) ||
+                newPosition.Y < 0 || newPosition.Y >= currentMap.GetLength(0))
             {
                 return false;
             }

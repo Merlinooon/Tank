@@ -23,40 +23,7 @@ namespace MapGenerator
             _unitFactory = unitFactory;
         }
 
-        //public void SetMenu()
-        //{
-
-        //    _renderer.Clear();
-        //    Console.WriteLine("Выберите уровень: ");
-        //    foreach (var levelMap in _gameData.LevelMaps)
-        //    {
-        //        Console.WriteLine(levelMap.Key);
-
-        //    }
-        //    string input = Console.ReadLine();
-        //    if (input != null || _gameData.LevelMaps.ContainsKey(input))
-        //    {
-
-        //        SetLevel(input);
-        //    }
-        //    else
-        //    {
-        //        SetMenu();
-        //    }
-        //}
-
-        //public void SetLevel(string level)
-        //{
-
-        //    Console.Clear();
-
-        //    LevelModel.SetMap(_gameData.LevelMaps[level]);
-
-        //    LevelModel.SetUnits(new Units());
-        //    SetMapPixels(_gameData.LevelMaps[level]);
-        //    SetUnits(_gameData.LevelUnits[level]);
-        //}
-
+       
         public void SetMapPixels(char[,] map)
         {
             // x - горизонталь(строка)

@@ -12,3 +12,4 @@ D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\refint\MapGenerator.dll
 D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.pdb
 D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.genruntimeconfig.cache
 D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\ref\MapGenerator.dll
+D:\Projects\MapGenerator\MapGenerator\obj\Debug\net8.0\MapGenerator.sourcelink.json

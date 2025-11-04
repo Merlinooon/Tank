@@ -26,10 +26,6 @@ namespace MapGenerator
         public virtual void Update() { }
 
 
-        //public bool CheckCollision(GameObject other)
-        //{
-        //    return CollisionChecker.CheckRectangleCollision(this.Bounds, other.Bounds);
-        //}
     }
     public enum StateOfTheObject
     {

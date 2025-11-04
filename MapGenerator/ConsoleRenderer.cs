@@ -33,8 +33,8 @@ namespace MapGenerator
         }
         public void Renderer(char[,] map, Units units = null)
         {
-            int height = map.GetLength(1);
-            int width = map.GetLength(0);
+            int height = map.GetLength(0);
+            int width = map.GetLength(1);
 
             Console.Clear();
 

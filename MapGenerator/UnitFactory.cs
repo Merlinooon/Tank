@@ -17,22 +17,21 @@ namespace MapGenerator
         {
             _renderer = renderer;
             _moveInput = moveInput;
-            _mapGenerator = mapGenerator; // Устанавливаем MapGenerator
+            _mapGenerator = mapGenerator;
         }
+
         public void CreateUnit(UnitConfig config)
         {
             switch (config.Type)
             {
                 case UnitType.Player:
-                    Player player = new Player(config.Position, _renderer, _moveInput,_mapGenerator);
+                    Player player = new Player(config.Position, _renderer, _moveInput, _mapGenerator);
                     LevelModel.AddUnit(player);
                     LevelModel.SetPlayer(player);
                     break;
-                //case UnitType.Missile:
-                //    LevelModel.AddUnit( new Missile(config.Position, _renderer));
-                //    break;
                 case UnitType.Enemy:
-                    LevelModel.AddUnit(new Enemy(config.Position, _renderer, _moveInput,LevelModel.GetInstance()));
+                    Enemy enemy = new Enemy(config.Position, _renderer, _moveInput, LevelModel.GetInstance());
+                    LevelModel.AddUnit(enemy);
                     break;
             }
         }

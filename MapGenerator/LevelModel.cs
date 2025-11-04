@@ -10,7 +10,7 @@ namespace MapGenerator
     public class LevelModel
     {
         private static LevelModel _instance;
-        private static char[,] _map;
+        private static char[,] _map; // Наша собственная копия карты
 
         public static Player _player;
         private static Units _units;
@@ -29,9 +29,29 @@ namespace MapGenerator
             return _instance;
         }
 
+        /// <summary>
+        /// Устанавливает карту (вызывается из MapGenerator)
+        /// </summary>
         public static void SetMap(char[,] map)
         {
-            _map = map; // Теперь используем тот же массив что и в MapGenerator
+            if (map == null) return;
+
+            // Создаем полную копию карты
+            _map = new char[map.GetLength(0), map.GetLength(1)];
+            Array.Copy(map, _map, map.Length);
+
+            Console.WriteLine($"LevelModel: карта установлена {_map.GetLength(0)}x{_map.GetLength(1)}");
+        }
+
+        /// <summary>
+        /// Обновляет конкретную клетку карты (для повреждения стен)
+        /// </summary>
+        public static void UpdateCell(int x, int y, char value)
+        {
+            if (_map != null && x >= 0 && x < _map.GetLength(0) && y >= 0 && y < _map.GetLength(1))
+            {
+                _map[x, y] = value;
+            }
         }
 
         public char[,] GetMap()
@@ -59,7 +79,5 @@ namespace MapGenerator
         {
             _units?.Add(unit);
         }
-       
-
     }
 }

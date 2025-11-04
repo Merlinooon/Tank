@@ -73,30 +73,39 @@ namespace MapGenerator
             Position.X + direction.X,  // Абсолютная X
             Position.Y + direction.Y); // Абсолютная Y
 
-           
 
-            // Создаем пулю с передачей MapGenerator
+
+            // Проверяем, что стартовая позиция не в стене
+            char[,] map = LevelModel.GetInstance().GetMap();
+            if (map != null)
+            {
+                int startX = (int)bulletStartPos.X;
+                int startY = (int)bulletStartPos.Y;
+
+                // Если стартовая позиция в стене - не создаем пулю
+                if (startX < 0 || startX >= map.GetLength(0) ||
+                    startY < 0 || startY >= map.GetLength(1) ||
+                    map[startX, startY] == '█' || map[startX, startY] == '▒')
+                {
+                    Console.WriteLine("Нельзя стрелять в стену!");
+                    return null;
+                }
+            }
+
             var missile = new Missile(bulletStartPos, direction, _renderer, _mapGenerator);
 
-            // Подписываемся на события пули
-            missile.Death += () => OnMissileDeath(missile);
-            missile.WallHit += (position) => OnMissileWallHit(position);
-
+            missile.Death += () => missile.OnMissileDeath(missile);
+           
             LevelModel.AddUnit(missile);
+
+            Console.WriteLine($"Игрок выстрелил с позиции ({bulletStartPos.X}, {bulletStartPos.Y})");
 
             return missile;
         }
 
-        private void OnMissileWallHit(Vector2 position)
-        {
-            Console.WriteLine($"Игрок попал в стену на позиции {position}");
-        }
+      
 
-        private void OnMissileDeath(Missile missile)
-        {
-            LevelModel.RemoveUnit(missile);
-            Console.WriteLine("Пуля уничтожена");
-        }
+      
 
         public void Dispose()
         {

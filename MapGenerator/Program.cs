@@ -5,7 +5,7 @@
 namespace MapGenerator
 {
 
-   
+
     class Program
     {
         static void Main()
@@ -13,22 +13,19 @@ namespace MapGenerator
             IRenderer renderer = new ConsoleRenderer();
             ConsoleInput input = new ConsoleInput();
 
-            // Создаем генератор карты ПЕРВЫМ
+            // Создаем генератор карты - он сам сохранит карту в LevelModel
             MapGenerator generator = new MapGenerator(15, 15, renderer);
 
-            // Инициализируем LevelModel тем же массивом
-            LevelModel.SetMap(generator.Map); // Используем generator.Map
             LevelModel.SetUnits(new Units());
-
-            // Создаем фабрику с передачей MapGenerator
             UnitFactory unitFactory = new UnitFactory(renderer, input, generator);
 
-            // Создаем игрока
             UnitConfig playerConfig = new UnitConfig(new Vector2(1, 1), "▲", UnitType.Player);
             unitFactory.CreateUnit(playerConfig);
 
-            UnitConfig enemyConfig = new UnitConfig(new Vector2(13, 13), "▼", UnitType.Enemy);
+            UnitConfig enemyConfig = new UnitConfig(new Vector2(5, 5), "▼", UnitType.Enemy);
             unitFactory.CreateUnit(enemyConfig);
+
+            Console.WriteLine("Игра запущена! Проверьте файл map.txt для просмотра карты.");
 
             while (true)
             {
@@ -48,9 +45,8 @@ namespace MapGenerator
                     }
                 }
 
-                // Отрисовываем актуальную карту из генератора
-                renderer.Renderer(generator.Map, LevelModel.Units);
-
+                // Отрисовываем карту из LevelModel
+                renderer.Renderer(LevelModel.GetInstance().GetMap(), LevelModel.Units);
                 Thread.Sleep(200);
             }
         }

@@ -9,11 +9,13 @@ namespace MapGenerator
 {
     public class Missile : Unit
     {
-         private Vector2 _direction;
+        private Vector2 _direction;
         public event Action<Vector2> WallHit;
         public event Action Death;
         Vector2 _startPosition;
         IRenderer _renderer;
+        private int _framesAlive = 0;
+
         private int _speed = 1;
         private MapGenerator _mapGenerator;
 
@@ -24,11 +26,13 @@ namespace MapGenerator
             _startPosition = startPosition;
             _renderer = renderer;
             _mapGenerator = mapGenerator;
+            _framesAlive = 0;
         }
 
         public override void Update()
         {
-            if (_mapGenerator == null || _mapGenerator.Map == null)
+            char[,] map = LevelModel.GetInstance().GetMap();
+            if (map == null)
             {
                 Death?.Invoke();
                 return;
@@ -39,8 +43,7 @@ namespace MapGenerator
                 Position.Y + _direction.Y * _speed
             );
 
-            // Проверяем столкновение со стенами
-            if (CheckWallCollision(newPosition))
+            if (CheckWallCollision(newPosition, map))
             {
                 HandleWallCollision(newPosition);
                 Death?.Invoke();
@@ -49,7 +52,6 @@ namespace MapGenerator
 
             Position = newPosition;
 
-            // Проверяем столкновения с юнитами
             if (LevelModel.Units != null)
             {
                 foreach (Unit unit in LevelModel.Units)
@@ -65,42 +67,46 @@ namespace MapGenerator
                 }
             }
 
-            // Проверяем выход за границы
-            if (Position.X < 0 || Position.X >= _mapGenerator.Map.GetLength(1) ||
-                Position.Y < 0 || Position.Y >= _mapGenerator.Map.GetLength(0))
+            if (Position.X < 0 || Position.X >= map.GetLength(0) ||
+                Position.Y < 0 || Position.Y >= map.GetLength(1))
             {
                 Death?.Invoke();
             }
         }
-
-        private bool CheckWallCollision(Vector2 position)
+        public void OnMissileDeath(Missile missile)
         {
-            if (_mapGenerator == null || _mapGenerator.Map == null)
-                return true;
+            LevelModel.RemoveUnit(missile);
+          
+        }
+        private bool CheckWallCollision(Vector2 position, char[,] map)
+        {
+            if (map == null) return true;
 
             int x = (int)position.X;
             int y = (int)position.Y;
 
-            if (x < 0 || x >= _mapGenerator.Map.GetLength(0) ||
-                y < 0 || y >= _mapGenerator.Map.GetLength(1))
-            {
+            if (x < 0 || x >= map.GetLength(0) || y < 0 || y >= map.GetLength(1))
                 return true;
-            }
 
-            char cell = _mapGenerator.Map[x, y];
+            char cell = map[x, y];
             return cell == '█' || cell == '▒';
         }
 
         private void HandleWallCollision(Vector2 collisionPosition)
         {
-            if (_mapGenerator == null) return;
+            int x = (int)collisionPosition.X;
+            int y = (int)collisionPosition.Y;
 
-            _mapGenerator.DamageWallAt(collisionPosition);
+            Console.WriteLine($"Пуля столкнулась со стеной в ({x}, {y})");
+
+            // Используем переданный MapGenerator
+            _mapGenerator?.DamageWallAt(collisionPosition);
+
             WallHit?.Invoke(collisionPosition);
         }
     }
-        
 
-       
+
+
 }
 

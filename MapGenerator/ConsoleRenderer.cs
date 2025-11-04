@@ -13,6 +13,9 @@ namespace MapGenerator
         private int _width;
         private int _height;
 
+        // Цветовая схема
+        private Dictionary<char, ConsoleColor> _colorScheme;
+
         public ConsoleRenderer()
         {
             _width = Console.WindowWidth;
@@ -20,6 +23,69 @@ namespace MapGenerator
             _pixels = new char[_width, _height];
             _previousPixels = new char[_width, _height];
             Console.CursorVisible = false;
+
+            InitializeColorScheme();
+            ApplyColorTheme();
+        }
+
+        /// <summary>
+        /// Инициализация цветовой схемы
+        /// </summary>
+        private void InitializeColorScheme()
+        {
+            _colorScheme = new Dictionary<char, ConsoleColor>
+            {
+                // Стены
+                { '█', ConsoleColor.Red },    // Полная стена
+                { '▒', ConsoleColor.Yellow },      // Полуразрушенная стена
+            
+                // Игрок и враги
+                { '▲', ConsoleColor.Green },       // Игрок (вверх)
+                { '▼', ConsoleColor.Red },         // Враг (вниз)
+                { '►', ConsoleColor.Green },       // Игрок (вправо)
+                { '◄', ConsoleColor.Green },       // Игрок (влево)
+            
+            };
+        }
+
+       
+        /// Применяет цветовую тему к консоли
+    
+        private void ApplyColorTheme()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Clear();
+        }
+
+       
+        /// Получает цвет для символа
+
+        private ConsoleColor GetColorForChar(char ch)
+        {
+            if (_colorScheme.ContainsKey(ch))
+                return _colorScheme[ch];
+
+            return ConsoleColor.White; // Цвет по умолчанию
+        }
+
+      
+        /// Получает цвет для юнита на основе его типа
+       
+        private ConsoleColor GetColorForUnit(Unit unit)
+        {
+            if (unit is Player)
+                return ConsoleColor.Green;
+            else if (unit is Enemy)
+                return ConsoleColor.Red;
+            else if (unit is Missile)
+            {
+                // Определяем цвет пули в зависимости от направления или типа стрелка
+                if (unit.View == "·") return ConsoleColor.Cyan;    // Пуля игрока
+                else return ConsoleColor.Magenta;                  // Пуля врага
+            }
+
+            return ConsoleColor.White;
         }
 
         private void SetPixel(int w, int h, char val)
@@ -31,14 +97,13 @@ namespace MapGenerator
         {
             SetPixel(w, h, val[0]);
         }
+
         public void Renderer(char[,] map, Units units = null)
         {
-            int height = map.GetLength(0);
-            int width = map.GetLength(1);
+            int width = map.GetLength(0);
+            int height = map.GetLength(1);
 
             Console.Clear();
-
-            var sb = new System.Text.StringBuilder();
 
             // Создаем временный буфер для отрисовки
             char[,] renderBuffer = new char[width, height];
@@ -60,25 +125,45 @@ namespace MapGenerator
                     if (unit.Position.X >= 0 && unit.Position.X < width &&
                         unit.Position.Y >= 0 && unit.Position.Y < height)
                     {
-                        renderBuffer[unit.Position.X, unit.Position.Y] = unit.View[0];
+                        // Не перезаписываем важные элементы карты
+                        char currentCell = renderBuffer[unit.Position.X, unit.Position.Y];
+                        if (currentCell == ' ' || currentCell == '·' || currentCell == '●')
+                        {
+                            renderBuffer[unit.Position.X, unit.Position.Y] = unit.View[0];
+                        }
                     }
                 }
             }
 
-            // Выводим буфер
+            // Выводим буфер с цветами
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    sb.Append(renderBuffer[x, y]);
+                    char cell = renderBuffer[x, y];
+                    ConsoleColor color = GetColorForChar(cell);
+
+                    // Особые случаи для юнитов
+                    if (units != null)
+                    {
+                        foreach (Unit unit in units)
+                        {
+                            if (unit.Position.X == x && unit.Position.Y == y)
+                            {
+                                color = GetColorForUnit(unit);
+                                break;
+                            }
+                        }
+                    }
+
+                    Console.ForegroundColor = color;
+                    Console.Write(cell);
                 }
-                if (y < height - 1)
-                    sb.AppendLine();
+                Console.WriteLine();
             }
 
-            Console.Write(sb.ToString());
+            
         }
-       
 
         public void Clear()
         {
@@ -91,6 +176,7 @@ namespace MapGenerator
                 }
             }
             Console.Clear();
+            ApplyColorTheme();
         }
     }
 }

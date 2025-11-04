@@ -13,7 +13,7 @@ namespace MapGenerator
         private int width;
         private int height;
         public List<Vector2> visited = new List<Vector2>();
-        public char[,] Map { get; private set; } // Делаем public с getter
+        public char[,] Map { get; private set; }
         private Random random = new Random();
         IRenderer renderer;
         public Vector2 start = new Vector2(1, 1);
@@ -28,15 +28,70 @@ namespace MapGenerator
             this.width = width;
             this.height = height;
             this.renderer = _renderer;
-            this.Map = new char[width, height]; // Инициализируем свойство Map
+            this.Map = new char[width, height];
             this.target = new Vector2(width - 2, height - 2);
+
+            // Инициализируем систему здоровья ДО генерации лабиринта
+            InitializeWallHealth();
 
             DrawTheWallAllMap();
             Termite(start, target, this.Map);
+
+            SaveMapToFile("map.txt");
+            LevelModel.SetMap(this.Map);
+
             renderer.Renderer(Map, units);
+
+           
         }
 
-       
+        /// Сохраняет карту в текстовый файл
+        private void InitializeWallHealth()
+        {
+            wallHealth.Clear();
+            Console.WriteLine("Инициализация системы здоровья стен...");
+        }
+        private void SaveMapToFile(string filename)
+        {
+           
+                using (StreamWriter writer = new StreamWriter(filename))
+                {
+                    for (int y = 0; y < height; y++)
+                    {
+                        for (int x = 0; x < width; x++)
+                        {
+                            writer.Write(Map[x, y]);
+                        }
+                        writer.WriteLine();
+                    }
+                }
+              
+           
+        }
+
+
+        /// Загружает карту из файла (может пригодиться для тестов)
+
+        public static char[,] LoadMapFromFile(string filename)
+        {
+          
+                var lines = File.ReadAllLines(filename);
+                int height = lines.Length;
+                int width = lines[0].Length;
+
+                char[,] map = new char[width, height];
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        map[x, y] = lines[y][x];
+                    }
+                }
+
+               
+                return map;
+        }
 
         private void DrawTheWallAllMap()
         {
@@ -45,9 +100,11 @@ namespace MapGenerator
                 for (int x = 0; x < width; x++)
                 {
                     Map[x, y] = '█';
+                    // Инициализируем здоровье для каждой стены
                     wallHealth[new Vector2(x, y)] = 2;
                 }
             }
+            Console.WriteLine($"Создано стен: {width * height}, здоровье инициализировано");
         }
 
         public void DamageWallAt(Vector2 position)
@@ -55,40 +112,53 @@ namespace MapGenerator
             int x = (int)position.X;
             int y = (int)position.Y;
 
-          
+            Console.WriteLine($"DamageWallAt: позиция ({x}, {y})");
 
             if (x >= 0 && x < width && y >= 0 && y < height)
             {
                 Vector2 posKey = new Vector2(x, y);
 
-                if (wallHealth.ContainsKey(posKey))
+                // Проверяем, что это вообще стена
+                char currentCell = Map[x, y];
+                if (currentCell != '█' && currentCell != '▒')
                 {
-                    wallHealth[posKey]--;
-                   
-
-                    if (wallHealth[posKey] <= 0)
-                    {
-                        Map[x, y] = ' ';
-                        wallHealth.Remove(posKey);
-                        
-                    }
-                    else if (wallHealth[posKey] == 1)
-                    {
-                        Map[x, y] = '▒';
-                       
-                    }
-
-                    // СРАЗУ обновляем LevelModel
-                    LevelModel.SetMap(this.Map);
+                    Console.WriteLine($"Это не стена: '{currentCell}'");
+                    return;
                 }
-                else
+
+                // Инициализируем здоровье если это новая стена
+                if (!wallHealth.ContainsKey(posKey))
                 {
-                  
+                    wallHealth[posKey] = 2; // Полная стена имеет 2 HP
+                    Console.WriteLine($"Инициализировано здоровье стены в ({x}, {y}): 2 HP");
                 }
+
+                // Наносим урон
+                wallHealth[posKey]--;
+                Console.WriteLine($"Стена в ({x}, {y}) - здоровье: {wallHealth[posKey]}");
+
+                if (wallHealth[posKey] <= 0)
+                {
+                    Map[x, y] = ' ';
+                    wallHealth.Remove(posKey);
+                    Console.WriteLine($"Стена в ({x}, {y}) УНИЧТОЖЕНА");
+                }
+                else if (wallHealth[posKey] == 1)
+                {
+                    Map[x, y] = '▒'; // Полуразрушенная стена
+                    Console.WriteLine($"Стена в ({x}, {y}) полуразрушена");
+                }
+
+                // ОБНОВЛЯЕМ LevelModel чтобы все видели изменения
+                LevelModel.UpdateCell(x, y, Map[x, y]);
+            }
+            else
+            {
+                Console.WriteLine($"Позиция ({x}, {y}) вне границ карты");
             }
         }
 
-        // Остальные методы без изменений...
+        
         private List<Direction> GetPossibleDirections(int x, int y)
         {
             var directions = new List<Direction>();

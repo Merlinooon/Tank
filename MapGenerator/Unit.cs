@@ -17,13 +17,14 @@ namespace MapGenerator
         bool _alive = true;
       
         public string View { get; protected set; } // Добавлено публичное свойство
+
+        public event Action Death;
+
         public Unit(Vector2 startPosition, string view, IRenderer renderer)
         {
             Position = startPosition;
             View = view;
             _renderer = renderer;
-           
-
         }
         public virtual bool TryMoveLeft()
         {
@@ -49,8 +50,13 @@ namespace MapGenerator
         {
             return _alive;
         }
+        protected virtual void OnDeath()
+        {
+            Death?.Invoke();
+            _alive = false;
+        }
 
-        
+
         protected virtual bool TryChangePosition(Vector2 newPosition)
         {
             char[,] currentMap = LevelModel.GetInstance().GetMap();

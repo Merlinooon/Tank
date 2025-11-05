@@ -97,59 +97,26 @@ namespace MapGenerator
         {
             SetPixel(w, h, val[0]);
         }
-
         public void Renderer(char[,] map, Units units = null)
         {
-            int width = map.GetLength(0);
-            int height = map.GetLength(1);
-
             Console.Clear();
 
-            // Создаем временный буфер для отрисовки
-            char[,] renderBuffer = new char[width, height];
-
-            // Копируем карту в буфер
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < map.GetLength(1); y++)
             {
-                for (int x = 0; x < width; x++)
+                for (int x = 0; x < map.GetLength(0); x++)
                 {
-                    renderBuffer[x, y] = map[x, y];
-                }
-            }
-
-            // Отрисовываем юниты поверх карты
-            if (units != null)
-            {
-                foreach (Unit unit in units)
-                {
-                    if (unit.Position.X >= 0 && unit.Position.X < width &&
-                        unit.Position.Y >= 0 && unit.Position.Y < height)
-                    {
-                        // Не перезаписываем важные элементы карты
-                        char currentCell = renderBuffer[unit.Position.X, unit.Position.Y];
-                        if (currentCell == ' ' || currentCell == '·' || currentCell == '●')
-                        {
-                            renderBuffer[unit.Position.X, unit.Position.Y] = unit.View[0];
-                        }
-                    }
-                }
-            }
-
-            // Выводим буфер с цветами
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    char cell = renderBuffer[x, y];
+                    char cell = map[x, y];
                     ConsoleColor color = GetColorForChar(cell);
 
-                    // Особые случаи для юнитов
+                    // Проверяем ТОЛЬКО ЖИВЫЕ юниты в этой позиции
                     if (units != null)
                     {
                         foreach (Unit unit in units)
                         {
-                            if (unit.Position.X == x && unit.Position.Y == y)
+                            // Важно: проверяем IsAlive() перед отрисовкой
+                            if (unit.IsAlive() && unit.Position.X == x && unit.Position.Y == y)
                             {
+                                cell = unit.View[0];
                                 color = GetColorForUnit(unit);
                                 break;
                             }
@@ -162,8 +129,87 @@ namespace MapGenerator
                 Console.WriteLine();
             }
 
-            
+            // Отладочная информация
+            int aliveUnits = 0;
+            if (units != null)
+            {
+                foreach (Unit unit in units)
+                {
+                    if (unit.IsAlive()) aliveUnits++;
+                }
+            }
+
+            Console.WriteLine($"Игрок: ({LevelModel.Player?.Position.X}, {LevelModel.Player?.Position.Y})");
+            Console.WriteLine($"Всего юнитов: {aliveUnits} живых");
         }
+
+
+        //public void Renderer(char[,] map, Units units = null)
+        //{
+        //    int width = map.GetLength(0);
+        //    int height = map.GetLength(1);
+
+        //    Console.Clear();
+
+        //    // Создаем временный буфер для отрисовки
+        //    char[,] renderBuffer = new char[width, height];
+
+        //    // Копируем карту в буфер
+        //    for (int y = 0; y < height; y++)
+        //    {
+        //        for (int x = 0; x < width; x++)
+        //        {
+        //            renderBuffer[x, y] = map[x, y];
+        //        }
+        //    }
+
+        //    // Отрисовываем юниты поверх карты
+        //    if (units != null)
+        //    {
+        //        foreach (Unit unit in units)
+        //        {
+        //            if (unit.Position.X >= 0 && unit.Position.X < width &&
+        //                unit.Position.Y >= 0 && unit.Position.Y < height)
+        //            {
+        //                // Не перезаписываем важные элементы карты
+        //                char currentCell = renderBuffer[unit.Position.X, unit.Position.Y];
+        //                if (currentCell == ' ' || currentCell == '·' || currentCell == '●')
+        //                {
+        //                    renderBuffer[unit.Position.X, unit.Position.Y] = unit.View[0];
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    // Выводим буфер с цветами
+        //    for (int y = 0; y < height; y++)
+        //    {
+        //        for (int x = 0; x < width; x++)
+        //        {
+        //            char cell = renderBuffer[x, y];
+        //            ConsoleColor color = GetColorForChar(cell);
+
+        //            // Особые случаи для юнитов
+        //            if (units != null)
+        //            {
+        //                foreach (Unit unit in units)
+        //                {
+        //                    if (unit.Position.X == x && unit.Position.Y == y)
+        //                    {
+        //                        color = GetColorForUnit(unit);
+        //                        break;
+        //                    }
+        //                }
+        //            }
+
+        //            Console.ForegroundColor = color;
+        //            Console.Write(cell);
+        //        }
+        //        Console.WriteLine();
+        //    }
+
+            
+        //}
 
         public void Clear()
         {

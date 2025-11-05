@@ -12,7 +12,5 @@ namespace MapGenerator
 
         public void Renderer(char[,] map, Units units);
         public void Clear();
-
-
     }
 }

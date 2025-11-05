@@ -17,7 +17,7 @@ namespace MapGenerator
         public Vector2 ShootDirection { get; private set; }
 
         public Player(Vector2 startPosition, IRenderer renderer, IMoveInput input, MapGenerator mapGenerator)
-            : base(startPosition, "▲", renderer)
+            : base(startPosition, "►", renderer)
         {
             _input = input;
             _renderer = renderer;
@@ -58,54 +58,69 @@ namespace MapGenerator
         {
             foreach (Unit unit in LevelModel.Units)
             {
-                if (unit == this)
+                if (unit == this || !unit.IsAlive()) // Пропускаем себя и мертвые юниты
                     continue;
+
                 if (Position.Equals(unit.Position))
                 {
-                    Death?.Invoke();
+                    if (unit is Missile missile)
+                    {
+                        HandleHit();
+                        missile.OnMissileDeath(missile);
+                    }
+                    else if (unit is Enemy)
+                    {
+                        Console.WriteLine("Игрок столкнулся с врагом!");
+                        OnDeath();
+                    }
                 }
             }
         }
 
+        public void HandleHit()
+        {
+           
+            RespawnAtRandomPosition();
+        }
+
+        private void RespawnAtRandomPosition()
+        {
+            Vector2? randomPosition = LevelModel.FindSafeRespawnPosition(this);
+            if (randomPosition.HasValue)
+            {
+                Position = randomPosition.Value;
+                
+            }
+            else
+            {
+               
+                OnDeath(); // Используем метод из базового класса
+            }
+        }
         public Missile Shoot(Vector2 direction)
         {
+            // Стартовая позиция пули - ПЕРЕД игроком (следующая клетка)
             Vector2 bulletStartPos = new Vector2(
-            Position.X + direction.X,  // Абсолютная X
-            Position.Y + direction.Y); // Абсолютная Y
+                Position.X + direction.X,
+                Position.Y + direction.Y
+            );
 
+            //Console.WriteLine($"=== ВЫСТРЕЛ ИГРОКА ===");
+            //Console.WriteLine($"Позиция игрока: ({Position.X}, {Position.Y})");
+            //Console.WriteLine($"Направление: ({direction.X}, {direction.Y})");
+            //Console.WriteLine($"Старт пули: ({bulletStartPos.X}, {bulletStartPos.Y})");
 
-
-            // Проверяем, что стартовая позиция не в стене
-            char[,] map = LevelModel.GetInstance().GetMap();
-            if (map != null)
-            {
-                int startX = (int)bulletStartPos.X;
-                int startY = (int)bulletStartPos.Y;
-
-                // Если стартовая позиция в стене - не создаем пулю
-                if (startX < 0 || startX >= map.GetLength(0) ||
-                    startY < 0 || startY >= map.GetLength(1) ||
-                    map[startX, startY] == '█' || map[startX, startY] == '▒')
-                {
-                    Console.WriteLine("Нельзя стрелять в стену!");
-                    return null;
-                }
-            }
-
+            // Создаем пулю ВСЕГДА, даже если в стене
             var missile = new Missile(bulletStartPos, direction, _renderer, _mapGenerator);
-
             missile.Death += () => missile.OnMissileDeath(missile);
-           
             LevelModel.AddUnit(missile);
-
-            Console.WriteLine($"Игрок выстрелил с позиции ({bulletStartPos.X}, {bulletStartPos.Y})");
 
             return missile;
         }
 
-      
 
-      
+
+
 
         public void Dispose()
         {

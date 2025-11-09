@@ -46,7 +46,7 @@ namespace MapGenerator
             _input.MoveLeft += () => { ShootDirection = new Vector2(-1, 0); UpdateView(); TryMoveLeft(); };
             _input.MoveRight += () => { ShootDirection = new Vector2(1, 0); UpdateView(); TryMoveRight(); };
 
-            // ИСПРАВЛЕНИЕ: запоминаем направление в момент выстрела
+            //  запоминаем направление в момент выстрела
             _input.Space += () =>
             {
                 Vector2 shootDir = ShootDirection; // Фиксируем текущее направление
@@ -89,12 +89,27 @@ namespace MapGenerator
             if (randomPosition.HasValue)
             {
                 Position = randomPosition.Value;
-                
+
+                // Проверяем, не попали ли в воду
+                char[,] map = LevelModel.GetInstance().GetMap();
+                if (map != null)
+                {
+                    char cell = map[Position.X, Position.Y];
+                    if (cell == '▓')
+                    {
+                        Console.WriteLine("ОШИБКА: Игрок зареспавнился в воде! Позиция: " + Position);
+                        // Пытаемся найти другую позицию
+                        RespawnAtRandomPosition();
+                        return;
+                    }
+                }
+
+                Console.WriteLine($"Игрок респавн в позиции ({Position.X}, {Position.Y})");
             }
             else
             {
-               
-                OnDeath(); // Используем метод из базового класса
+                Console.WriteLine("Не найдена свободная позиция для респавна игрока");
+                OnDeath();
             }
         }
         public Missile Shoot(Vector2 direction)
@@ -105,10 +120,7 @@ namespace MapGenerator
                 Position.Y + direction.Y
             );
 
-            //Console.WriteLine($"=== ВЫСТРЕЛ ИГРОКА ===");
-            //Console.WriteLine($"Позиция игрока: ({Position.X}, {Position.Y})");
-            //Console.WriteLine($"Направление: ({direction.X}, {direction.Y})");
-            //Console.WriteLine($"Старт пули: ({bulletStartPos.X}, {bulletStartPos.Y})");
+          
 
             // Создаем пулю ВСЕГДА, даже если в стене
             var missile = new Missile(bulletStartPos, direction, _renderer, _mapGenerator);

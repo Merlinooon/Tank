@@ -154,41 +154,36 @@ namespace MapGenerator
         /// </summary>
         private static bool IsPositionSafeForRespawn(int x, int y, Unit excludingUnit)
         {
-            // Проверяем расстояние до игрока
-            if (_player != null && _player.IsAlive())
+            // Проверяем, что это не вода
+            char cell = _map[x, y];
+            if (cell == '▓') // Вода не подходит для респавна
             {
-                double distanceToPlayer = Math.Sqrt(
-                    Math.Pow(x - _player.Position.X, 2) +
-                    Math.Pow(y - _player.Position.Y, 2)
-                );
-
-                if (distanceToPlayer < 3) // Минимальное расстояние до игрока
-                    return false;
+                return false;
             }
 
-            // Проверяем расстояние до врагов и что позиция не занята
+            // Проверяем, что позиция не рядом с врагами
             if (_units != null)
             {
                 foreach (Unit unit in _units)
                 {
-                    if (unit == excludingUnit || !unit.IsAlive())
+                    if (unit == excludingUnit || !unit.IsAlive() || unit is Missile)
                         continue;
-
-                    // Проверяем занятость позиции
-                    if (unit.Position.X == x && unit.Position.Y == y)
-                        return false;
 
                     // Для врагов проверяем минимальное расстояние
                     if (unit is Enemy)
                     {
-                        double distanceToEnemy = Math.Sqrt(
+                        double distance = Math.Sqrt(
                             Math.Pow(x - unit.Position.X, 2) +
                             Math.Pow(y - unit.Position.Y, 2)
                         );
 
-                        if (distanceToEnemy < 2) // Минимальное расстояние до врага
+                        if (distance < 5) // Минимальное расстояние до врага
                             return false;
                     }
+
+                    // Проверяем занятость позиции
+                    if (unit.Position.X == x && unit.Position.Y == y)
+                        return false;
                 }
             }
 

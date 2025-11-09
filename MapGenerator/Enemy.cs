@@ -30,15 +30,20 @@ namespace MapGenerator
         private int _shootCooldown = 0;
         private const int SHOOT_COOLDOWN_TIME = 5;
 
+        private int _moveCooldown = 0;
+        private const int MOVE_COOLDOWN_TIME = 2; // Задержка между движениями
         public Vector2 ShootDirection { get; private set; }
 
 
-        public Enemy(Vector2 startPosition, IRenderer renderer, IMoveInput input, LevelModel levelModel)
+        public Enemy(Vector2 startPosition, IRenderer renderer, IMoveInput input, LevelModel levelModel, MapGenerator mapGenerator)
             : base(startPosition, "▼", renderer)
         {
             _renderer = renderer;
             this.LevelModel = levelModel;
+            _mapGenerator = mapGenerator; // Сохраняем MapGenerator
+
             _target = GetRandomTargetPosition();
+
             ShootDirection = new Vector2(0, 1);// на старте направлен углом вниз
         }
 
@@ -51,19 +56,28 @@ namespace MapGenerator
             if (LevelModel.Player != null && LevelModel.Player.IsAlive())
             {
                 UpdateState();
-                ExecuteStateBehavior();
+
+                // Обновляем кулдауны движения
+                if (_moveCooldown > 0)
+                    _moveCooldown--;
+
+                // Двигаемся только если кулдаун прошел
+                if (_moveCooldown == 0)
+                {
+                    ExecuteStateBehavior();
+                    _moveCooldown = MOVE_COOLDOWN_TIME; // Устанавливаем задержку
+                }
+
                 UpdateCooldowns();
-                CheckCollisions(); // Эта строка должна быть здесь
+                CheckCollisions();
             }
             else
             {
-                // Если игрок мертв, все равно проверяем столкновения с пулями
                 CheckCollisions();
             }
         }
-        /// <summary>
+
         /// Обновление состояния врага
-        /// </summary>
         private void UpdateState()
         {
             bool canSeePlayer = HasLineOfSightToPlayer();
@@ -82,9 +96,8 @@ namespace MapGenerator
                 _currentState = EnemyState.Patrolling;
             }
         }
-        /// <summary>
+        
         /// Выполнение поведения в зависимости от состояния
-        /// </summary>
         private void ExecuteStateBehavior()
         {
             switch (_currentState)
@@ -100,9 +113,8 @@ namespace MapGenerator
                     break;
             }
         }
-        /// <summary>
+        
         /// Поведение при патрулировании
-        /// </summary>
         private void PatrolBehavior()
         {
             // Обновляем случайную цель каждые N кадров
@@ -137,44 +149,32 @@ namespace MapGenerator
 
             return false;
         }
-        /// <summary>
+        
         /// Поведение при преследовании
-        /// </summary>
         private void ChaseBehavior()
         {
             _target = LevelModel.Player.Position;
             UpdateLookDirectionTowardsPlayer();
             MoveTowardsTarget(_target);
         }
-        /// <summary>
+
         /// Поведение при атаке
-        /// </summary>
         private void AttackBehavior()
         {
             _target = LevelModel.Player.Position;
             UpdateLookDirectionTowardsPlayer();
 
-            // Стреляем, если готовы
+            // Стреляем в направлении взгляда, а не рассчитываем заново
             if (_shootCooldown == 0)
             {
-                ShootAtPlayer();
+                Shoot(ShootDirection); // ← Стреляем в текущем направлении взгляда
                 _shootCooldown = SHOOT_COOLDOWN_TIME;
             }
-
-            // Двигаемся к игроку, но не слишком близко
-            double distanceToPlayer = GetDistanceToPlayer();
-            if (distanceToPlayer > 3) // Поддерживаем дистанцию для стрельбы
-            {
-                MoveTowardsTarget(_target);
-            }
-            else if (distanceToPlayer < 2) // Слишком близко - отходим
-            {
-                MoveAwayFromPlayer();
-            }
         }
-        /// <summary>
+
+       
+
         /// Движение к цели
-        /// </summary>
         private void MoveTowardsTarget(Vector2 target)
         {
             var directions = GetPossibleDirections();
@@ -215,9 +215,8 @@ namespace MapGenerator
                 }
             }
         }
-        /// <summary>
+
         /// Отход от игрока
-        /// </summary>
         private void MoveAwayFromPlayer()
         {
             if (LevelModel.Player == null) return;
@@ -362,64 +361,64 @@ namespace MapGenerator
             Shoot(direction);
         }
 
+        // Удаляем ненужный метод GetShootDirection() или изменяем его:
         private Vector2 GetShootDirection()
         {
-            Vector2 playerPos = LevelModel.Player.Position;
-            Vector2 direction = new Vector2(0, 0);
-
-            if (Position.X == playerPos.X)
-            {
-                direction = new Vector2(0, Position.Y < playerPos.Y ? 1 : -1);
-            }
-            else if (Position.Y == playerPos.Y)
-            {
-                direction = new Vector2(Position.X < playerPos.X ? 1 : -1, 0);
-            }
-
-            return direction;
+            // Просто возвращаем текущее направление взгляда
+            return ShootDirection;
         }
 
         public Missile Shoot(Vector2 direction)
         {
+            // Убедимся, что пуля создается на расстоянии от врага
             Vector2 bulletStartPos = new Vector2(
-                Position.X + direction.X * 2,
-                Position.Y + direction.Y * 2
+                Position.X + direction.X,
+                Position.Y + direction.Y
             );
 
-            // Проверяем валидность стартовой позиции
-            char[,] map = LevelModel.GetInstance().GetMap();
-            if (map != null)
+            // ДОПОЛНИТЕЛЬНАЯ ПРОВЕРКА: убедимся, что стартовая позиция не занята врагом
+            if (bulletStartPos.Equals(Position))
             {
-                int startX = (int)bulletStartPos.X;
-                int startY = (int)bulletStartPos.Y;
+                Console.WriteLine("ОШИБКА: Пуля создается внутри врага!");
+                // Сдвигаем пулю еще на одну клетку
+                bulletStartPos = new Vector2(
+                    Position.X + direction.X * 2,
+                    Position.Y + direction.Y * 2
+                );
+            }
 
-                if (startX >= 0 && startX < map.GetLength(0) &&
-                    startY >= 0 && startY < map.GetLength(1) &&
-                    map[startX, startY] != ' ')
-                {
-                    bulletStartPos = new Vector2(
-                        Position.X + direction.X,
-                        Position.Y + direction.Y
-                    );
-                }
+            // Проверяем, что стартовая позиция валидна
+            char[,] map = LevelModel.GetInstance().GetMap();
+            if (map != null &&
+                (bulletStartPos.X < 0 || bulletStartPos.X >= map.GetLength(0) ||
+                 bulletStartPos.Y < 0 || bulletStartPos.Y >= map.GetLength(1) ||
+                 IsWallAtPosition(bulletStartPos, map)))
+            {
+                Console.WriteLine("Нельзя выстрелить - на пути стена или граница карты");
+                return null;
             }
 
             var missile = new Missile(bulletStartPos, direction, _renderer, _mapGenerator);
-
             missile.Death += () => missile.OnMissileDeath(missile);
-           
-
             LevelModel.AddUnit(missile);
             MissileFired?.Invoke(missile);
 
-            
+            Console.WriteLine($"Враг выстрелил в направлении ({direction.X}, {direction.Y}) из позиции ({Position.X}, {Position.Y})");
+
             return missile;
         }
-        /// <summary>
-        /// Получение лучшего направления для движения к цели
-        /// </summary>
-        /// 
 
+        // Добавляем вспомогательный метод
+        private bool IsWallAtPosition(Vector2 position, char[,] map)
+        {
+            int x = (int)position.X;
+            int y = (int)position.Y;
+            return x >= 0 && x < map.GetLength(0) &&
+                   y >= 0 && y < map.GetLength(1) &&
+                   (map[x, y] == '█' || map[x, y] == '▒');
+        }
+
+        /// Получение лучшего направления для движения к цели
         private Direction GetBestDirectionTowardsTarget(List<Direction> possibleDirections, Vector2 target)
         {
             if (possibleDirections.Count == 0)
@@ -470,34 +469,8 @@ namespace MapGenerator
             return movingTowardsX || movingTowardsY;
         }
 
-        //private Direction GetBestDirectionTowardsTarget(List<Direction> possibleDirections, Vector2 target)
-        //{
-        //    Direction bestDir = possibleDirections[0];
-        //    int bestDistance = int.MaxValue;
-
-        //    foreach (var dir in possibleDirections)
-        //    {
-        //        var (dx, dy) = GetDirectionVector(dir);
-        //        int newX = Position.X + dx;
-        //        int newY = Position.Y + dy;
-
-        //        int distance = Math.Abs(newX - target.X) + Math.Abs(newY - target.Y);
-
-        //        if (distance < bestDistance)
-        //        {
-        //            bestDistance = distance;
-        //            bestDir = dir;
-        //        }
-        //    }
-
-        //    return bestDir;
-        //}
-
-
-
-        /// <summary>
+      
         /// Получение лучшего направления для отхода от игрока
-        /// </summary>
         private Direction GetBestDirectionAwayFromPlayer(List<Direction> possibleDirections)
         {
             if (LevelModel.Player == null) return possibleDirections[0];
@@ -523,9 +496,7 @@ namespace MapGenerator
 
             return bestDir;
         }
-        /// <summary>
-        /// Получение случайной целевой позиции на карте
-        /// </summary>
+         /// Получение случайной целевой позиции на карте
         private Vector2 GetRandomTargetPosition()
         {
             if (_map == null) return new Vector2(1, 1);
@@ -567,34 +538,30 @@ namespace MapGenerator
 
             return new Vector2(1, 1);
         }
-        /// <summary>
+
         /// Проверка, можно ли достичь цели
-        /// </summary>
         private bool CanReachTarget(Vector2 target)
         {
             // Простая проверка - цель должна быть в пределах карты и не слишком далеко
             return GetDistance(Position, target) < 20;
         }
-        /// <summary>
+
         /// Расчет расстояния между двумя точками
-        /// </summary>
         private double GetDistance(Vector2 a, Vector2 b)
         {
             return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
         }
 
-        /// <summary>
+
         /// Расчет расстояния до игрока
-        /// </summary>
         private double GetDistanceToPlayer()
         {
             if (LevelModel.Player == null) return double.MaxValue;
             return GetDistance(Position, LevelModel.Player.Position);
         }
 
-        /// <summary>
+
         /// Обновление кулдаунов
-        /// </summary>
         private void UpdateCooldowns()
         {
             if (_shootCooldown > 0)
@@ -603,9 +570,8 @@ namespace MapGenerator
             if (_targetUpdateCooldown > 0)
                 _targetUpdateCooldown--;
         }
-        /// <summary>
+      
         /// Проверка столкновений
-        /// </summary>
         private void CheckCollisions()
         {
             foreach (Unit unit in LevelModel.Units)
@@ -626,29 +592,7 @@ namespace MapGenerator
                 }
             }
         }
-        //private Direction GetBestDirection(List<Direction> possibleDirections)
-        //{
-        //    // Простая эвристика: выбираем направление, которое ближе к игроку
-        //    Direction bestDir = possibleDirections[0];
-        //    int bestDistance = int.MaxValue;
-
-        //    foreach (var dir in possibleDirections)
-        //    {
-        //        var (dx, dy) = GetDirectionVector(dir);
-        //        int newX = Position.X + dx;
-        //        int newY = Position.Y + dy;
-
-        //        int distance = Math.Abs(newX - _target.X) + Math.Abs(newY - _target.Y);
-
-        //        if (distance < bestDistance)
-        //        {
-        //            bestDistance = distance;
-        //            bestDir = dir;
-        //        }
-        //    }
-
-        //    return bestDir;
-        //}
+       
         private bool TryMove(Direction direction)
         {
             bool moved = false;
@@ -783,14 +727,7 @@ namespace MapGenerator
             int cols = _map.GetLength(1);
             return x >= 0 && x < rows && y >= 0 && y < cols;
         }
-        private void ShuffleDirections(List<Direction> directions)
-        {
-            for (int i = directions.Count - 1; i > 0; i--)
-            {
-                int j = random.Next(i + 1);
-                (directions[i], directions[j]) = (directions[j], directions[i]);
-            }
-        }
+       
         // Состояние врага
         private enum EnemyState
         {

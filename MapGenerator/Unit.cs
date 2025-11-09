@@ -63,17 +63,24 @@ namespace MapGenerator
             if (currentMap == null) return false;
 
             // Проверяем границы
-            if (newPosition.X < 0 || newPosition.X >= currentMap.GetLength(1) ||
-                newPosition.Y < 0 || newPosition.Y >= currentMap.GetLength(0))
-            {
+            if (newPosition.X < 0 || newPosition.X >= currentMap.GetLength(0) ||
+                newPosition.Y < 0 || newPosition.Y >= currentMap.GetLength(1))
                 return false;
-            }
 
-            // Проверяем стену
-            if (currentMap[newPosition.X, newPosition.Y] == '█')
+            char cell = currentMap[(int)newPosition.X, (int)newPosition.Y];
+
+            // Вода блокирует движение
+            if (cell == '▓')
             {
+                Console.WriteLine("Нельзя пройти через воду!");
                 return false;
             }
+            //  стена блокирует движение
+            if (cell == '▒')
+                return false;
+           
+            if (cell == '█')
+                return false;
 
             Position = newPosition;
             return true;

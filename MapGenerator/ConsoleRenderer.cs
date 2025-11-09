@@ -36,7 +36,7 @@ namespace MapGenerator
             _colorScheme = new Dictionary<char, ConsoleColor>
             {
                 // Стены
-                { '█', ConsoleColor.Red },    // Полная стена
+                { '█', ConsoleColor.Red },         // Полная стена
                 { '▒', ConsoleColor.Yellow },      // Полуразрушенная стена
             
                 // Игрок и враги
@@ -44,7 +44,9 @@ namespace MapGenerator
                 { '▼', ConsoleColor.Red },         // Враг (вниз)
                 { '►', ConsoleColor.Green },       // Игрок (вправо)
                 { '◄', ConsoleColor.Green },       // Игрок (влево)
-            
+
+                { '▓', ConsoleColor.Blue },
+
             };
         }
 
@@ -97,7 +99,7 @@ namespace MapGenerator
         {
             SetPixel(w, h, val[0]);
         }
-        public void Renderer(char[,] map, Units units = null)
+        public void Renderer(char[,] map, Units units, int currentLevel = 1, int enemiesRemaining = 0, int totalEnemies = 0)
         {
             Console.Clear();
 
@@ -107,109 +109,87 @@ namespace MapGenerator
                 {
                     char cell = map[x, y];
                     ConsoleColor color = GetColorForChar(cell);
+                    char finalChar = cell;
 
-                    // Проверяем ТОЛЬКО ЖИВЫЕ юниты в этой позиции
+                    // Проверяем юниты в этой позиции
                     if (units != null)
                     {
+                        Unit unitInCell = null;
                         foreach (Unit unit in units)
                         {
-                            // Важно: проверяем IsAlive() перед отрисовкой
                             if (unit.IsAlive() && unit.Position.X == x && unit.Position.Y == y)
                             {
-                                cell = unit.View[0];
-                                color = GetColorForUnit(unit);
+                                unitInCell = unit;
                                 break;
                             }
+                        }
+
+                        if (unitInCell != null)
+                        {
+                            // Если это пуля - отрисовываем поверх всего
+                            if (unitInCell is Missile)
+                            {
+                                finalChar = unitInCell.View[0];
+                                color = GetColorForUnit(unitInCell);
+                            }
+                            // Если это игрок/враг и он на пустой клетке
+                            else if (cell == ' ')
+                            {
+                                finalChar = unitInCell.View[0];
+                                color = GetColorForUnit(unitInCell);
+                            }
+                            // Если игрок/враг на воде - не отрисовываем (вода имеет приоритет)
                         }
                     }
 
                     Console.ForegroundColor = color;
-                    Console.Write(cell);
+                    Console.Write(finalChar);
                 }
+
                 Console.WriteLine();
             }
-
-            // Отладочная информация
-            int aliveUnits = 0;
-            if (units != null)
-            {
-                foreach (Unit unit in units)
-                {
-                    if (unit.IsAlive()) aliveUnits++;
-                }
-            }
-
-            Console.WriteLine($"Игрок: ({LevelModel.Player?.Position.X}, {LevelModel.Player?.Position.Y})");
-            Console.WriteLine($"Всего юнитов: {aliveUnits} живых");
+            RenderLevelStats(currentLevel, enemiesRemaining, totalEnemies);
         }
 
+        /// Отрисовывает статистику уровня
+        /// </summary>
+        private void RenderLevelStats(int currentLevel, int enemiesRemaining, int totalEnemies)
+        {
+            Console.WriteLine("══════════════════════════════════════════");
+            Console.WriteLine($"🎯 Уровень: {currentLevel} | 🎯 Врагов: {enemiesRemaining}/{totalEnemies}");
 
-        //public void Renderer(char[,] map, Units units = null)
-        //{
-        //    int width = map.GetLength(0);
-        //    int height = map.GetLength(1);
+            // Прогресс-бар для визуализации
+            if (totalEnemies > 0)
+            {
+                double progress = (double)(totalEnemies - enemiesRemaining) / totalEnemies;
+                RenderProgressBar(progress);
+            }
 
-        //    Console.Clear();
+            Console.WriteLine("⚡ Управление: Стрелки - Движение | Пробел - Огонь | ESC - Меню");
+            Console.WriteLine("══════════════════════════════════════════");
+        }
 
-        //    // Создаем временный буфер для отрисовки
-        //    char[,] renderBuffer = new char[width, height];
+        // Отрисовывает прогресс-бар уничтожения врагов
+        /// </summary>
+        private void RenderProgressBar(double progress)
+        {
+            int barLength = 20;
+            int filledLength = (int)(barLength * progress);
 
-        //    // Копируем карту в буфер
-        //    for (int y = 0; y < height; y++)
-        //    {
-        //        for (int x = 0; x < width; x++)
-        //        {
-        //            renderBuffer[x, y] = map[x, y];
-        //        }
-        //    }
-
-        //    // Отрисовываем юниты поверх карты
-        //    if (units != null)
-        //    {
-        //        foreach (Unit unit in units)
-        //        {
-        //            if (unit.Position.X >= 0 && unit.Position.X < width &&
-        //                unit.Position.Y >= 0 && unit.Position.Y < height)
-        //            {
-        //                // Не перезаписываем важные элементы карты
-        //                char currentCell = renderBuffer[unit.Position.X, unit.Position.Y];
-        //                if (currentCell == ' ' || currentCell == '·' || currentCell == '●')
-        //                {
-        //                    renderBuffer[unit.Position.X, unit.Position.Y] = unit.View[0];
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    // Выводим буфер с цветами
-        //    for (int y = 0; y < height; y++)
-        //    {
-        //        for (int x = 0; x < width; x++)
-        //        {
-        //            char cell = renderBuffer[x, y];
-        //            ConsoleColor color = GetColorForChar(cell);
-
-        //            // Особые случаи для юнитов
-        //            if (units != null)
-        //            {
-        //                foreach (Unit unit in units)
-        //                {
-        //                    if (unit.Position.X == x && unit.Position.Y == y)
-        //                    {
-        //                        color = GetColorForUnit(unit);
-        //                        break;
-        //                    }
-        //                }
-        //            }
-
-        //            Console.ForegroundColor = color;
-        //            Console.Write(cell);
-        //        }
-        //        Console.WriteLine();
-        //    }
-
-            
-        //}
+            Console.Write("Прогресс: [");
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int i = 0; i < filledLength; i++)
+            {
+                Console.Write("█");
+            }
+            Console.ForegroundColor = ConsoleColor.Gray;
+            for (int i = filledLength; i < barLength; i++)
+            {
+                Console.Write("░");
+            }
+            Console.ResetColor();
+            Console.WriteLine($"] {(int)(progress * 100)}%");
+        }
 
         public void Clear()
         {

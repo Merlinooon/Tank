@@ -14,5 +14,8 @@ namespace MapGenerator
         public event Action MoveRight;
         public event Action Esc;
         public event Action Space;
+
+        public void Update();
+      
     }
 }

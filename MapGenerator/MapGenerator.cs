@@ -35,14 +35,18 @@ namespace MapGenerator
             InitializeWallHealth();
 
             DrawTheWallAllMap();
+
             Termite(start, target, this.Map);
+
+            DrawTheWaterOnMap();
+            
 
             SaveMapToFile("map.txt");
             LevelModel.SetMap(this.Map);
 
             renderer.Renderer(Map, units);
 
-           
+
         }
 
         /// Сохраняет карту в текстовый файл
@@ -53,20 +57,20 @@ namespace MapGenerator
         }
         private void SaveMapToFile(string filename)
         {
-           
-                using (StreamWriter writer = new StreamWriter(filename))
+
+            using (StreamWriter writer = new StreamWriter(filename))
+            {
+                for (int y = 0; y < height; y++)
                 {
-                    for (int y = 0; y < height; y++)
+                    for (int x = 0; x < width; x++)
                     {
-                        for (int x = 0; x < width; x++)
-                        {
-                            writer.Write(Map[x, y]);
-                        }
-                        writer.WriteLine();
+                        writer.Write(Map[x, y]);
                     }
+                    writer.WriteLine();
                 }
-              
-           
+            }
+
+
         }
 
 
@@ -74,23 +78,23 @@ namespace MapGenerator
 
         public static char[,] LoadMapFromFile(string filename)
         {
-          
-                var lines = File.ReadAllLines(filename);
-                int height = lines.Length;
-                int width = lines[0].Length;
 
-                char[,] map = new char[width, height];
+            var lines = File.ReadAllLines(filename);
+            int height = lines.Length;
+            int width = lines[0].Length;
 
-                for (int y = 0; y < height; y++)
+            char[,] map = new char[width, height];
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
                 {
-                    for (int x = 0; x < width; x++)
-                    {
-                        map[x, y] = lines[y][x];
-                    }
+                    map[x, y] = lines[y][x];
                 }
+            }
 
-               
-                return map;
+
+            return map;
         }
 
         private void DrawTheWallAllMap()
@@ -106,7 +110,54 @@ namespace MapGenerator
             }
             Console.WriteLine($"Создано стен: {width * height}, здоровье инициализировано");
         }
+        private void DrawTheWaterOnMap()
+        {
+            // Создаем несколько случайных озер
+            int numberOfLakes = random.Next(1, 3); // От 3 до 7 озер
 
+            for (int i = 0; i < numberOfLakes; i++)
+            {
+                CreateWaterLake();
+            }
+        }
+        private void CreateWaterLake()
+        {
+            // Случайный центр озера
+            int centerX = random.Next(3, width - 4);
+            int centerY = random.Next(3, height - 4);
+
+            // Случайный размер озера
+            int lakeSize = random.Next(1, 3);
+
+            Console.WriteLine($"Создаем озеро в ({centerX}, {centerY}) размером {lakeSize}");
+
+            // Создаем озеро и пространство вокруг
+            for (int y = centerY - lakeSize - 1; y <= centerY + lakeSize + 1; y++)
+            {
+                for (int x = centerX - lakeSize - 1; x <= centerX + lakeSize + 1; x++)
+                {
+                    if (x >= 1 && x < width - 1 && y >= 1 && y < height - 1)
+                    {
+                        // Проверяем расстояние до центра
+                        double distance = Math.Sqrt(Math.Pow(x - centerX, 2) + Math.Pow(y - centerY, 2));
+
+                        if (distance <= lakeSize)
+                        {
+                            // Внутренняя часть - вода
+                            if (random.Next(100) < 80)
+                            {
+                                Map[x, y] = '▓';
+                            }
+                        }
+                        else if (distance <= lakeSize + 1)
+                        {
+                            // Буферная зона - пустое пространство
+                            Map[x, y] = ' ';
+                        }
+                    }
+                }
+            }
+        }
         public void DamageWallAt(Vector2 position)
         {
             int x = (int)position.X;
@@ -158,7 +209,7 @@ namespace MapGenerator
             }
         }
 
-        
+
         private List<Direction> GetPossibleDirections(int x, int y)
         {
             var directions = new List<Direction>();
@@ -171,7 +222,7 @@ namespace MapGenerator
             return directions;
         }
 
-       
+
         private bool CanMove(int x, int y, Direction direction)
         {
             var (dx, dy) = GetDirectionVector(direction);
@@ -185,7 +236,7 @@ namespace MapGenerator
                    Map[checkX, checkY] == '█';
         }
 
-       
+
         private (int dx, int dy) GetDirectionVector(Direction direction)
         {
             return direction switch
@@ -198,7 +249,7 @@ namespace MapGenerator
             };
         }
 
-      
+
         private bool IsValidPosition(int x, int y)
         {
             return x > 0 && x < width - 1 && y > 0 && y < height - 1;
@@ -212,7 +263,7 @@ namespace MapGenerator
             }
         }
 
-       
+
         private int GetMaxStepLength(int x, int y, Direction direction)
         {
             var (dx, dy) = GetDirectionVector(direction);
@@ -230,7 +281,7 @@ namespace MapGenerator
 
                 if (!IsValidPosition(wallX, wallY) || !IsValidPosition(finalX, finalY) ||
                     visited.Contains(new Vector2(finalX, finalY)) ||
-                    Map[finalX, finalY] != '█')
+                    Map[finalX, finalY] != '█') // Только обычная стена, не вода
                 {
                     break;
                 }
@@ -240,7 +291,7 @@ namespace MapGenerator
             int maxAllowedSteps = Math.Min(width, height) / 3 + 1;
             return Math.Min(maxSteps, maxAllowedSteps);
         }
-       
+
         private bool TryCreatePath(int startX, int startY, Direction direction, int steps)
         {
             var (dx, dy) = GetDirectionVector(direction);
@@ -280,14 +331,14 @@ namespace MapGenerator
 
             return true;
         }
-       
+
         private (int x, int y) MoveInDirection(int startX, int startY, Direction direction, int steps)
         {
             var (dx, dy) = GetDirectionVector(direction);
             return (startX + dx * steps * 2, startY + dy * steps * 2);
         }
 
-       
+
         private void Termite(Vector2 startPosition, Vector2 targetPosition, char[,] map)
         {
             visited.Add(startPosition);
@@ -323,8 +374,7 @@ namespace MapGenerator
         }
     }
 
-   
+
 
 }
-
 

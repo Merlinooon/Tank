@@ -142,9 +142,7 @@ namespace MapGenerator
             }
         }
 
-        /// <summary>
         /// Подсчитывает количество живых врагов
-        /// </summary>
         private static int GetAliveEnemiesCount()
         {
             int aliveEnemies = 0;
@@ -160,27 +158,7 @@ namespace MapGenerator
             }
             return aliveEnemies;
         }
-        private static void ShowLevelStats(LevelManager levelManager)
-        {
-            int aliveEnemies = 0;
-            int totalEnemies = levelManager.CurrentLevelConfig?.TargetEnemyCount ?? 0;
-
-            if (LevelModel.Units != null)
-            {
-                foreach (Unit unit in LevelModel.Units)
-                {
-                    if (unit is Enemy && unit.IsAlive())
-                    {
-                        aliveEnemies++;
-                    }
-                }
-            }
-
-            Console.WriteLine("══════════════════════════════════════════");
-            Console.WriteLine($"Уровень: {levelManager.CurrentLevel} | Сложность: {levelManager.Difficulty}");
-            Console.WriteLine($"Врагов: {aliveEnemies}/{totalEnemies} | Цель: уничтожить всех");
-            Console.WriteLine("ESC - Меню | Стрелки - Движение | Пробел - Стрельба");
-        }
+       
         private static void ShowDifficultyMenu(LevelManager levelManager)
         {
             Console.Clear();
@@ -245,7 +223,7 @@ namespace MapGenerator
             // Проверка поражения (игрок умер)
             if (LevelModel.Player != null && !LevelModel.Player.IsAlive())
             {
-                Console.WriteLine("💀 Поражение! Рестарт уровня...");
+                Console.WriteLine("Поражение! Рестарт уровня...");
                 Thread.Sleep(2000);
                 levelManager.RestartLevel(input);
                 return;

@@ -186,14 +186,7 @@ namespace MapGenerator
 
         private bool IsWallAtPosition(Vector2 position, char[,] map)
         {
-            int x = (int)position.X;
-            int y = (int)position.Y;
-
-            if (x < 0 || x >= map.GetLength(0) || y < 0 || y >= map.GetLength(1))
-                return true;
-
-            char cell = map[x, y];
-            return cell == '█' || cell == '▒';
+            return PositionHelper.IsWall(position, map);
         }
 
         private bool CheckUnitCollision(Vector2 position)

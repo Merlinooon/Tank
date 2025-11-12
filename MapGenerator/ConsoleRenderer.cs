@@ -28,9 +28,7 @@ namespace MapGenerator
             ApplyColorTheme();
         }
 
-        /// <summary>
         /// Инициализация цветовой схемы
-        /// </summary>
         private void InitializeColorScheme()
         {
             _colorScheme = new Dictionary<char, ConsoleColor>
@@ -152,11 +150,10 @@ namespace MapGenerator
         }
 
         /// Отрисовывает статистику уровня
-        /// </summary>
         private void RenderLevelStats(int currentLevel, int enemiesRemaining, int totalEnemies)
         {
             Console.WriteLine("══════════════════════════════════════════");
-            Console.WriteLine($"🎯 Уровень: {currentLevel} | 🎯 Врагов: {enemiesRemaining}/{totalEnemies}");
+            Console.WriteLine($"Уровень: {currentLevel} |  Врагов: {enemiesRemaining}/{totalEnemies}");
 
             // Прогресс-бар для визуализации
             if (totalEnemies > 0)
@@ -165,12 +162,11 @@ namespace MapGenerator
                 RenderProgressBar(progress);
             }
 
-            Console.WriteLine("⚡ Управление: Стрелки - Движение | Пробел - Огонь | ESC - Меню");
+            Console.WriteLine("Управление: Стрелки - Движение | Пробел - Огонь | ESC - Меню");
             Console.WriteLine("══════════════════════════════════════════");
         }
 
         // Отрисовывает прогресс-бар уничтожения врагов
-        /// </summary>
         private void RenderProgressBar(double progress)
         {
             int barLength = 20;

@@ -17,31 +17,31 @@ namespace MapGenerator
 
         public void Update()
         {
-            ConsoleKeyInfo keyInfo;
-            while (Console.KeyAvailable)
+            if (!Console.KeyAvailable)
+                return;
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            switch (keyInfo.Key)
             {
-                keyInfo = Console.ReadKey(true);
-                switch (keyInfo.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        MoveUp?.Invoke();
-                        break;
-                    case ConsoleKey.DownArrow:
-                        MoveDown?.Invoke();
-                        break;
-                    case ConsoleKey.RightArrow:
-                        MoveRight?.Invoke();
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        MoveLeft?.Invoke();
-                        break;
-                    case ConsoleKey.Spacebar:
-                        Space?.Invoke();
-                        break;
-                    case ConsoleKey.Escape:
-                        Esc?.Invoke();
-                        break;
-                }
+                case ConsoleKey.UpArrow:
+                    MoveUp?.Invoke();
+                    break;
+                case ConsoleKey.DownArrow:
+                    MoveDown?.Invoke();
+                    break;
+                case ConsoleKey.RightArrow:
+                    MoveRight?.Invoke();
+                    break;
+                case ConsoleKey.LeftArrow:
+                    MoveLeft?.Invoke();
+                    break;
+                case ConsoleKey.Spacebar:
+                    Space?.Invoke();
+                    break;
+                case ConsoleKey.Escape:
+                    Esc?.Invoke();
+                    break;
             }
         }
     }

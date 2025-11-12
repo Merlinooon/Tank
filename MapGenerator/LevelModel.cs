@@ -29,9 +29,7 @@ namespace MapGenerator
             return _instance;
         }
 
-        /// <summary>
         /// Устанавливает карту (вызывается из MapGenerator)
-        /// </summary>
         public static void SetMap(char[,] map)
         {
             if (map == null) return;
@@ -43,9 +41,7 @@ namespace MapGenerator
             Console.WriteLine($"LevelModel: карта установлена {_map.GetLength(0)}x{_map.GetLength(1)}");
         }
 
-        /// <summary>
         /// Обновляет конкретную клетку карты (для повреждения стен)
-        /// </summary>
         public static void UpdateCell(int x, int y, char value)
         {
             if (_map != null && x >= 0 && x < _map.GetLength(0) && y >= 0 && y < _map.GetLength(1))
@@ -85,41 +81,15 @@ namespace MapGenerator
         {
             _units?.Add(unit);
         }
-        /// <summary>
+
         /// Находит случайную свободную позицию на карте
-        /// </summary>
         public static Vector2? FindRandomEmptyPosition()
         {
             if (_map == null) return null;
-
-            Random random = new Random();
-            List<Vector2> emptyPositions = new List<Vector2>();
-            int width = _map.GetLength(0);
-            int height = _map.GetLength(1);
-
-            // Собираем все свободные позиции
-            for (int x = 1; x < width - 1; x++)
-            {
-                for (int y = 1; y < height - 1; y++)
-                {
-                    if (_map[x, y] == ' ')
-                    {
-                        emptyPositions.Add(new Vector2(x, y));
-                    }
-                }
-            }
-
-            if (emptyPositions.Count > 0)
-            {
-                return emptyPositions[random.Next(emptyPositions.Count)];
-            }
-
-            return null;
+            return MapHelper.FindRandomEmptyPosition(_map);
         }
 
-        /// <summary>
         /// Находит безопасную случайную позицию для респавна
-        /// </summary>
         public static Vector2? FindSafeRespawnPosition(Unit excludingUnit = null)
         {
             if (_map == null) return null;
@@ -149,9 +119,7 @@ namespace MapGenerator
             return FindRandomEmptyPosition();
         }
 
-        /// <summary>
         /// Проверяет, безопасна ли позиция для респавна
-        /// </summary>
         private static bool IsPositionSafeForRespawn(int x, int y, Unit excludingUnit)
         {
             // Проверяем, что это не вода

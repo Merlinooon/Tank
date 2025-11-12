@@ -39,9 +39,7 @@ namespace MapGenerator
             }
         }
 
-        /// <summary>
-        /// Находит безопасную стартовую позицию (не в воде)
-        /// </summary>
+        /// Находит безопасную стартовую позицию 
         private Vector2 GetSafeStartPosition(Vector2 desiredPosition)
         {
             char[,] map = LevelModel.GetInstance().GetMap();
@@ -57,9 +55,7 @@ namespace MapGenerator
             return FindNearestSafePosition(desiredPosition, map);
         }
 
-        /// <summary>
         /// Проверяет, безопасна ли позиция для старта
-        /// </summary>
         private bool IsPositionSafeForStart(Vector2 position, char[,] map)
         {
             int x = (int)position.X;
@@ -72,9 +68,7 @@ namespace MapGenerator
             return map[x, y] == ' ';
         }
 
-        /// <summary>
         /// Находит ближайшую безопасную позицию
-        /// </summary>
         private Vector2 FindNearestSafePosition(Vector2 startPosition, char[,] map)
         {
             // Ищем в радиусе 5 клеток

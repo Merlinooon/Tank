@@ -7,7 +7,6 @@ using static MapGenerator.MapGenerator;
 
 namespace MapGenerator
 {
-    
     public class Player : Unit, IDisposable, IAttack
     {
         public event Action Death;
@@ -112,6 +111,7 @@ namespace MapGenerator
                 OnDeath();
             }
         }
+
         public Missile Shoot(Vector2 direction)
         {
             // Стартовая позиция пули - ПЕРЕД игроком (следующая клетка)
@@ -120,8 +120,6 @@ namespace MapGenerator
                 Position.Y + direction.Y
             );
 
-          
-
             // Создаем пулю ВСЕГДА, даже если в стене
             var missile = new Missile(bulletStartPos, direction, _renderer, _mapGenerator);
             missile.Death += () => missile.OnMissileDeath(missile);
@@ -129,10 +127,6 @@ namespace MapGenerator
 
             return missile;
         }
-
-
-
-
 
         public void Dispose()
         {

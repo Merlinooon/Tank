@@ -32,18 +32,13 @@ namespace MapGenerator
            
         }
 
-        /// <summary>
         /// Инициализация конфигураций уровней
-        /// </summary>
         private void InitializeLevels()
         {
             _levelsConfig = new Dictionary<int, LevelConfig>
             {
                 { 1, new LevelConfig(15, 15, 2, 3, 2, "Уровень 1 - Начало пути") },
                 { 2, new LevelConfig(20, 20, 3, 5, 3, "Уровень 2 - Наращивая темп") },
-                { 3, new LevelConfig(25, 25, 4, 7, 4, "Уровень 3 - Сложные решения") },
-                { 4, new LevelConfig(30, 30, 5, 10, 5, "Уровень 4 - Битва титанов") },
-                { 5, new LevelConfig(35, 35, 6, 12, 6, "Уровень 5 - Финальное испытание") }
             };
         }
         public bool IsLevelCompleted()
@@ -74,7 +69,7 @@ namespace MapGenerator
         {
             Console.Clear();
             Console.WriteLine("==========================================");
-            Console.WriteLine("            🎉 ПОЗДРАВЛЯЕМ! 🎉");
+            Console.WriteLine("             ПОЗДРАВЛЯЕМ! ");
             Console.WriteLine("==========================================");
             Console.WriteLine($"    Уровень {CurrentLevel} пройден!");
             Console.WriteLine($"    Уничтожено врагов: {CurrentLevelConfig.TargetEnemyCount}");
@@ -89,7 +84,7 @@ namespace MapGenerator
             }
             else
             {
-                Console.WriteLine("    Вы прошли все уровни! 🏆");
+                Console.WriteLine("    Вы прошли все уровни! ");
             }
 
             Console.WriteLine();
@@ -98,9 +93,8 @@ namespace MapGenerator
             Console.WriteLine("==========================================");
             Console.ReadKey(true);
         }
-        /// <summary>
+
         /// Загрузка уровня
-        /// </summary>
         public void LoadLevel(int levelNumber, IMoveInput input) // Добавляем input как параметр
         {
             if (!_levelsConfig.ContainsKey(levelNumber))
@@ -132,9 +126,7 @@ namespace MapGenerator
             Console.WriteLine($"Уровень {levelNumber} загружен!");
         }
 
-        /// <summary>
         /// Создание юнитов для уровня
-        /// </summary>
         private void CreateLevelUnits(IMoveInput input)
         {
             UnitFactory unitFactory = new UnitFactory(
@@ -160,9 +152,7 @@ namespace MapGenerator
             Console.WriteLine($"Создано врагов: {enemyCount}");
         }
 
-        /// <summary>
         /// Расчет количества врагов
-        /// </summary>
         private int CalculateEnemyCount()
         {
             int baseCount = CurrentLevelConfig.BaseEnemyCount;
@@ -180,9 +170,7 @@ namespace MapGenerator
             return (int)(baseCount * difficultyMultiplier);
         }
 
-        /// <summary>
         /// Поиск безопасной стартовой позиции для игрока
-        /// </summary>
         private Vector2 FindSafeStartPosition()
         {
             // Предпочтительные стартовые позиции
@@ -202,9 +190,7 @@ namespace MapGenerator
             return FindAnySafePosition();
         }
 
-        /// <summary>
         /// Поиск безопасной позиции для врага
-        /// </summary>
         private Vector2 FindSafeEnemyPosition()
         {
             // Враги появляются дальше от игрока
@@ -230,9 +216,7 @@ namespace MapGenerator
             return FindAnySafePosition();
         }
 
-        /// <summary>
         /// Поиск любой безопасной позиции
-        /// </summary>
         private Vector2 FindAnySafePosition()
         {
             char[,] map = LevelModel.GetInstance().GetMap();
@@ -249,9 +233,7 @@ namespace MapGenerator
             return new Vector2(1, 1); // Fallback
         }
 
-        /// <summary>
         /// Проверка безопасности позиции для старта
-        /// </summary>
         private bool IsPositionSafeForStart(Vector2 position)
         {
             char[,] map = LevelModel.GetInstance().GetMap();
@@ -265,10 +247,7 @@ namespace MapGenerator
             return map[x, y] == ' ';
         }
 
-        /// <summary>
         /// Переход на следующий уровень
-        /// </summary>
-
         public void NextLevel(IMoveInput input)
         {
             int nextLevel = CurrentLevel + 1;
@@ -287,7 +266,7 @@ namespace MapGenerator
         {
             Console.Clear();
             Console.WriteLine("==========================================");
-            Console.WriteLine("        🏆 ПОБЕДА! 🏆");
+            Console.WriteLine("        🏆 ПОБЕДА! ");
             Console.WriteLine("==========================================");
             Console.WriteLine("  Вы прошли все уровни игры Танки!");
             Console.WriteLine();
@@ -297,26 +276,21 @@ namespace MapGenerator
             Console.WriteLine("==========================================");
             Console.ReadKey(true);
         }
-        /// <summary>
+
         /// Перезапуск текущего уровня
-        /// </summary>
         public void RestartLevel(IMoveInput input) // Добавляем input как параметр
         {
             LoadLevel(CurrentLevel, input); // Передаем input
         }
 
-        /// <summary>
         /// Установка сложности
-        /// </summary>
         public void SetDifficulty(Difficulty difficulty)
         {
             Difficulty = difficulty;
             Console.WriteLine($"Установлена сложность: {difficulty}");
         }
 
-        /// <summary>
         /// Получение статистики уровня
-        /// </summary>
         public LevelStats GetLevelStats()
         {
             return new LevelStats

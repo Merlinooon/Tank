@@ -74,28 +74,28 @@ namespace MapGenerator
         }
 
 
-        /// Загружает карту из файла (может пригодиться для тестов)
+        ///// Загружает карту из файла 
 
-        public static char[,] LoadMapFromFile(string filename)
-        {
+        //public static char[,] LoadMapFromFile(string filename)
+        //{
 
-            var lines = File.ReadAllLines(filename);
-            int height = lines.Length;
-            int width = lines[0].Length;
+        //    var lines = File.ReadAllLines(filename);
+        //    int height = lines.Length;
+        //    int width = lines[0].Length;
 
-            char[,] map = new char[width, height];
+        //    char[,] map = new char[width, height];
 
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    map[x, y] = lines[y][x];
-                }
-            }
+        //    for (int y = 0; y < height; y++)
+        //    {
+        //        for (int x = 0; x < width; x++)
+        //        {
+        //            map[x, y] = lines[y][x];
+        //        }
+        //    }
 
 
-            return map;
-        }
+        //    return map;
+        //}
 
         private void DrawTheWallAllMap()
         {
@@ -338,7 +338,6 @@ namespace MapGenerator
             return (startX + dx * steps * 2, startY + dy * steps * 2);
         }
 
-
         private void Termite(Vector2 startPosition, Vector2 targetPosition, char[,] map)
         {
             visited.Add(startPosition);
@@ -363,8 +362,6 @@ namespace MapGenerator
                 }
             }
         }
-
-
         public enum Direction
         {
             Up,
@@ -373,8 +370,5 @@ namespace MapGenerator
             Right
         }
     }
-
-
-
 }
 

@@ -195,7 +195,7 @@ namespace MapGenerator
                 }
             }
 
-            Direction bestDirection = GetBestDirectionTowardsTarget(directions, target);
+            Direction bestDirection = GetBestDirectionTowardsTarget( target);
             UpdateLookDirection(bestDirection);
 
             bool moved = TryMove(bestDirection);
@@ -216,42 +216,29 @@ namespace MapGenerator
             }
         }
 
-        /// Отход от игрока
-        private void MoveAwayFromPlayer()
-        {
-            if (LevelModel.Player == null) return;
-
-            var directions = GetPossibleDirections();
-            if (directions.Count == 0) return;
-
-            Direction bestDirection = GetBestDirectionAwayFromPlayer(directions);
-            UpdateLookDirection(bestDirection);
-            TryMove(bestDirection);
-        }
 
         public void HandleHit()
         {
-            Console.WriteLine($"Враг получил попадание в позиции ({Position.X}, {Position.Y})");
-            RespawnAtRandomPosition();
+            OnDeath();
         }
 
-        private void RespawnAtRandomPosition()
-        {
-            Vector2? randomPosition = LevelModel.FindSafeRespawnPosition(this);
-            if (randomPosition.HasValue)
-            {
-                Position = randomPosition.Value;
-                visited.Clear();
-                _target = GetRandomTargetPosition(); // Новая цель после респавна
-                _currentState = EnemyState.Patrolling; // Возвращаемся к патрулированию
-                Console.WriteLine($"Враг респавн в позиции ({Position.X}, {Position.Y})");
-            }
-            else
-            {
-                Console.WriteLine("Не найдена свободная позиция для респавна врага");
-                OnDeath();
-            }
-        }
+        //private void RespawnAtRandomPosition()
+        //{
+        //    Vector2? randomPosition = LevelModel.FindSafeRespawnPosition(this);
+        //    if (randomPosition.HasValue)
+        //    {
+        //        Position = randomPosition.Value;
+        //        visited.Clear();
+        //        _target = GetRandomTargetPosition(); // Новая цель после респавна
+        //        _currentState = EnemyState.Patrolling; // Возвращаемся к патрулированию
+        //        Console.WriteLine($"Враг респавн в позиции ({Position.X}, {Position.Y})");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Не найдена свободная позиция для респавна врага");
+        //        OnDeath();
+        //    }
+        //}
         private  void UpdateView()
         {
             View = ShootDirection switch
@@ -305,67 +292,7 @@ namespace MapGenerator
             if (LevelModel.Player == null || !LevelModel.Player.IsAlive() || _map == null)
                 return false;
 
-            Vector2 playerPos = LevelModel.Player.Position;
-
-            if (Position.Y == playerPos.Y && HasHorizontalLineOfSight(playerPos))
-                return true;
-
-            if (Position.X == playerPos.X && HasVerticalLineOfSight(playerPos))
-                return true;
-
-            return false;
-        }
-
-        private bool HasHorizontalLineOfSight(Vector2 playerPos)
-        {
-            int startX = Math.Min(Position.X, playerPos.X);
-            int endX = Math.Max(Position.X, playerPos.X);
-            int y = Position.Y;
-
-            for (int x = startX + 1; x < endX; x++)
-            {
-                if (x < 0 || x >= _map.GetLength(0) || y < 0 || y >= _map.GetLength(1))
-                    return false;
-
-                if (_map[x, y] == '█' || _map[x, y] == '▒')
-                    return false;
-            }
-
-            return true;
-        }
-
-        private bool HasVerticalLineOfSight(Vector2 playerPos)
-        {
-            int startY = Math.Min(Position.Y, playerPos.Y);
-            int endY = Math.Max(Position.Y, playerPos.Y);
-            int x = Position.X;
-
-            for (int y = startY + 1; y < endY; y++)
-            {
-                if (x < 0 || x >= _map.GetLength(0) || y < 0 || y >= _map.GetLength(1))
-                    return false;
-
-                if (_map[x, y] == '█' || _map[x, y] == '▒')
-                    return false;
-            }
-
-            return true;
-        }
-        
-
-        private void ShootAtPlayer()
-        {
-            if (LevelModel.Player == null) return;
-
-            Vector2 direction = GetShootDirection();
-            Shoot(direction);
-        }
-
-        // Удаляем ненужный метод GetShootDirection() или изменяем его:
-        private Vector2 GetShootDirection()
-        {
-            // Просто возвращаем текущее направление взгляда
-            return ShootDirection;
+            return UnitHelper.HasLineOfSight(Position, LevelModel.Player.Position, _map);
         }
 
         public Missile Shoot(Vector2 direction)
@@ -419,83 +346,11 @@ namespace MapGenerator
         }
 
         /// Получение лучшего направления для движения к цели
-        private Direction GetBestDirectionTowardsTarget(List<Direction> possibleDirections, Vector2 target)
+        private Direction GetBestDirectionTowardsTarget(Vector2 target)
         {
-            if (possibleDirections.Count == 0)
-                throw new InvalidOperationException("Нет возможных направлений");
-
-            // Иногда добавляем случайность чтобы избежать зацикливания
-            if (random.Next(100) < 10) // 10% chance
-            {
-                Direction randomDir = possibleDirections[random.Next(possibleDirections.Count)];
-                Console.WriteLine($"Случайный выбор направления: {randomDir}");
-                return randomDir;
-            }
-
-            Direction bestDir = possibleDirections[0];
-            int bestDistance = int.MaxValue;
-
-            foreach (var dir in possibleDirections)
-            {
-                var (dx, dy) = GetDirectionVector(dir);
-                int newX = Position.X + dx;
-                int newY = Position.Y + dy;
-
-                int distance = Math.Abs(newX - target.X) + Math.Abs(newY - target.Y);
-
-                if (IsDirectionTowardsTarget(dir, target))
-                {
-                    distance -= 2;
-                }
-
-                if (distance < bestDistance)
-                {
-                    bestDistance = distance;
-                    bestDir = dir;
-                }
-            }
-
-            Console.WriteLine($"Лучшее направление: {bestDir}, расстояние: {bestDistance}");
-            return bestDir;
-        }
-        private bool IsDirectionTowardsTarget(Direction direction, Vector2 target)
-        {
-            var (dx, dy) = GetDirectionVector(direction);
-
-            // Проверяем, движемся ли мы в общем направлении к цели
-            bool movingTowardsX = (dx > 0 && Position.X < target.X) || (dx < 0 && Position.X > target.X);
-            bool movingTowardsY = (dy > 0 && Position.Y < target.Y) || (dy < 0 && Position.Y > target.Y);
-
-            return movingTowardsX || movingTowardsY;
+            return MovementHelper.GetBestDirectionTowardsTarget(this, target, _map, random);
         }
 
-      
-        /// Получение лучшего направления для отхода от игрока
-        private Direction GetBestDirectionAwayFromPlayer(List<Direction> possibleDirections)
-        {
-            if (LevelModel.Player == null) return possibleDirections[0];
-
-            Direction bestDir = possibleDirections[0];
-            int bestDistance = 0;
-
-            foreach (var dir in possibleDirections)
-            {
-                var (dx, dy) = GetDirectionVector(dir);
-                int newX = Position.X + dx;
-                int newY = Position.Y + dy;
-
-                int distance = Math.Abs(newX - LevelModel.Player.Position.X) +
-                              Math.Abs(newY - LevelModel.Player.Position.Y);
-
-                if (distance > bestDistance)
-                {
-                    bestDistance = distance;
-                    bestDir = dir;
-                }
-            }
-
-            return bestDir;
-        }
          /// Получение случайной целевой позиции на карте
         private Vector2 GetRandomTargetPosition()
         {
@@ -557,7 +412,7 @@ namespace MapGenerator
         private double GetDistanceToPlayer()
         {
             if (LevelModel.Player == null) return double.MaxValue;
-            return GetDistance(Position, LevelModel.Player.Position);
+            return PositionHelper.GetDistance(Position, LevelModel.Player.Position);
         }
 
 
@@ -665,47 +520,7 @@ namespace MapGenerator
         }
         private List<Direction> GetPossibleDirections()
         {
-            var directions = new List<Direction>();
-
-            // Проверяем все направления
-            if (CanMove(Direction.Up)) directions.Add(Direction.Up);
-            if (CanMove(Direction.Down)) directions.Add(Direction.Down);
-            if (CanMove(Direction.Left)) directions.Add(Direction.Left);
-            if (CanMove(Direction.Right)) directions.Add(Direction.Right);
-
-            // Если нет возможных направлений, пробуем очистить историю и попробовать снова
-            if (directions.Count == 0 && visited.Count > 0)
-            {
-                Console.WriteLine("Враг застрял, очищаем историю посещений");
-                visited.Clear();
-
-                // Повторно проверяем направления после очистки истории
-                if (CanMove(Direction.Up)) directions.Add(Direction.Up);
-                if (CanMove(Direction.Down)) directions.Add(Direction.Down);
-                if (CanMove(Direction.Left)) directions.Add(Direction.Left);
-                if (CanMove(Direction.Right)) directions.Add(Direction.Right);
-            }
-
-            Console.WriteLine($"Возможные направления: {directions.Count}");
-            return directions;
-        }
-
-        private bool CanMove(Direction direction)
-        {
-            var (dx, dy) = GetDirectionVector(direction);
-
-            int checkX = Position.X + dx;
-            int checkY = Position.Y + dy;
-
-            // Проверяем, что позиция валидна и не является стеной
-            bool isValid = IsValidPosition(checkX, checkY) &&
-                          _map[checkX, checkY] != '█'; // Только целая стена блокирует
-
-            // Проверяем, не посещали ли недавно эту позицию (но не блокируем полностью)
-            bool notRecentlyVisited = !visited.Contains(new Vector2(checkX, checkY)) ||
-                                     visited.Count > 8; // Разрешаем повторное посещение после 8 ходов
-
-            return isValid && notRecentlyVisited;
+            return MovementHelper.GetPossibleDirections(this, _map);
         }
 
         private (int dx, int dy) GetDirectionVector(Direction direction)
@@ -718,14 +533,6 @@ namespace MapGenerator
                 Direction.Right => (1, 0),
                 _ => (0, 0)
             };
-        }
-
-        private bool IsValidPosition(int x, int y)
-        {
-
-            int rows = _map.GetLength(0);
-            int cols = _map.GetLength(1);
-            return x >= 0 && x < rows && y >= 0 && y < cols;
         }
        
         // Состояние врага

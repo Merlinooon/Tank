@@ -56,7 +56,6 @@ namespace MapGenerator
             _alive = false;
         }
 
-
         protected virtual bool TryChangePosition(Vector2 newPosition)
         {
             char[,] currentMap = LevelModel.GetInstance().GetMap();
